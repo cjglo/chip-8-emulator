@@ -12,6 +12,8 @@ int main() {
     PC.bits = 0;
     uint16_t IRegister = 0;
 
+    createDisplay();
+
 
     // TODO: Init Front Sprite data in Memory between 50...9F
 
