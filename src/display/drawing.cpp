@@ -1,3 +1,5 @@
+#include "../../include/drawing.h"
+
 void createDisplay() {
     InitWindow(WINDOW_LENGTH, WINDOW_HEIGHT, "Space Invader");
 	SetTargetFPS(60);
