@@ -1,6 +1,6 @@
 ROOT_TO_SOURCE_FILES := src/main.cpp src/commands.cpp src/display/drawing.cpp
 SOURCE_FILES := main.cpp commands.cpp display/drawing.cpp
-LIBRARIES := -lraylib -lglfw3 -lGL -lopenal -lm -ldl -pthreads
+LIBRARIES := -lraylib -lGL -lm -ldl 
 
 build: ${ROOT_TO_SOURCE_FILES}
 	cd src && g++ ${SOURCE_FILES} ${LIBRARIES}
