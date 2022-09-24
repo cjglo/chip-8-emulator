@@ -5,6 +5,10 @@ int main() {
     // Initialize all virtual hardware
     uint8_t Memory[MEMORY_SIZE];
     bool Display[DISPLAY_HEIGHT][DISPLAY_WIDTH];
+	for(int i = 0; i<DISPLAY_HEIGHT; i++)
+		for(int j = 0; j<DISPLAY_WIDTH; j++) {
+            Display[i][j] = false;
+		}
     uint16_t Stack[STACK_SIZE];
     uint8_t DelayTimer = 255;
     uint8_t SoundTimer = 255;
@@ -12,23 +16,19 @@ int main() {
     PC.bits = 0;
     uint16_t IRegister = 0;
 
-    createDisplay();
-
-    sleep(2);
-
-    updateDisplay(Display);
-
-    sleep(2);
-
-    closeDisplay();
-
-
     // TODO: Init Front Sprite data in Memory between 50...9F
 
-    // begin loop
-        // fetch
-        // decode
-        // execute
+    createWindow();
+    updateDisplay(Display);
+    bool shutdownCommandWasCalled = false; // not sure how I feel about this, maybe a better way by calling raylib close
 
+    while(!WindowShouldClose && !shutdownCommandWasCalled) { // WindowShouldClose is raylib func that returns true on ESC or close button
+        // execution loop:
+            // fetch
+            // decode
+            // execute
+    }
+
+    CloseWindow();
     return 0;
 }
