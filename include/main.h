@@ -3,6 +3,7 @@
 
 #include <stdint.h>
 #include <iostream>
+#include <unistd.h>
 
 #include "commands.h"
 #include "drawing.h"

@@ -1,7 +1,5 @@
 #include "../include/main.h"
 
-#include <unistd.h>
-
 int main() {
 
     // Initialize all virtual hardware
