@@ -14,9 +14,9 @@ int main() {
 
     createDisplay();
 
-    sleep(5);
+    sleep(2);
 
-    updateDisplay();
+    updateDisplay(Display);
 
     sleep(2);
 
