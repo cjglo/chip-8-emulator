@@ -14,7 +14,7 @@ void updateDisplay(bool display[DISPLAY_HEIGHT][DISPLAY_WIDTH]) {
 		for(int j = 0; j<DISPLAY_WIDTH; j++) {
 
 			if(display[i][j]) {
-				DrawRectangle(WINDOW_LENGTH/2, WINDOW_HEIGHT/2, 30, 30, MAROON);
+				DrawRectangle(i, j, 10, 10, WHITE);
 			}
 
 		}
