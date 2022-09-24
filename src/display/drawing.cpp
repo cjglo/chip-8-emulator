@@ -10,15 +10,11 @@ void updateDisplay(bool display[DISPLAY_HEIGHT][DISPLAY_WIDTH]) {
 	ClearBackground(BLACK);
     // DrawText("Window Draw Success", 190, 200, 20, LIGHTGRAY);
 
-	// TODO: Draw grid
-	DrawGrid(100, 50);
-
-	// Fill in grid
 	for(int i = 0; i<DISPLAY_HEIGHT; i++)
 		for(int j = 0; j<DISPLAY_WIDTH; j++) {
 
 			if(display[i][j]) {
-
+				DrawRectangle(WINDOW_LENGTH/2, WINDOW_HEIGHT/2, 30, 30, MAROON);
 			}
 
 		}
