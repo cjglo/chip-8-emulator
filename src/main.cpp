@@ -1,5 +1,7 @@
 #include "../include/main.h"
 
+#include <unistd.h>
+
 int main() {
 
     // Initialize all virtual hardware
@@ -11,6 +13,16 @@ int main() {
     uint10_struct PC;
     PC.bits = 0;
     uint16_t IRegister = 0;
+
+    createDisplay();
+
+    sleep(5);
+
+    updateDisplay();
+
+    sleep(2);
+
+    closeDisplay();
 
 
     // TODO: Init Front Sprite data in Memory between 50...9F
