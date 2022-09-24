@@ -11,6 +11,6 @@
 // func stubs
 void createDisplay();
 void updateDisplay();
-void closeDipsplay();
+void closeDisplay();
 
 #endif
