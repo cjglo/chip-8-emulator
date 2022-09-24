@@ -10,5 +10,7 @@
 
 // func stubs
 void createDisplay();
+void updateDisplay();
+void closeDipsplay();
 
 #endif
