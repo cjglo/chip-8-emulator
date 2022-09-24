@@ -1,18 +1,20 @@
 #ifndef __MAIN_H__
 #define __MAIN_H__
 
-#include <stdint.h>
-#include <iostream>
-#include <unistd.h>
-
-#include "commands.h"
-#include "drawing.h"
-
 // emulator constants
 #define DISPLAY_HEIGHT 32
 #define DISPLAY_WIDTH 64
 #define MEMORY_SIZE 4096
 #define STACK_SIZE 16
+
+// libaries
+#include <stdint.h>
+#include <iostream>
+#include <unistd.h>
+
+// internal files
+#include "commands.h"
+#include "drawing.h"
 
 // emulator types
 struct uint10_struct {
