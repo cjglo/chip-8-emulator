@@ -1,10 +1,12 @@
 #ifndef __MAIN_H__
 #define __MAIN_H__
 
+// libaries
 #include <stdint.h>
 #include <iostream>
 #include <unistd.h>
 
+// internal files
 #include "commands.h"
 #include "drawing.h"
 

@@ -4,13 +4,16 @@
 // libraries
 #include "raylib.h"
 
+// internal files
+#include "main.h"
+
 // constants
-#define WINDOW_HEIGHT 500
-#define WINDOW_LENGTH 800
+#define WINDOW_HEIGHT 320
+#define WINDOW_LENGTH 640
 
 // func stubs
 void createDisplay();
-void updateDisplay();
+void updateDisplay(bool display[DISPLAY_HEIGHT][DISPLAY_WIDTH]);
 void closeDisplay();
 
 #endif
