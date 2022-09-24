@@ -28,10 +28,10 @@ int main() {
             // decode
             // execute
 	
-	// in the future execution will updateDisplay and or close window
-	// for testing I will leave updateDisplay in loop seperate
-	// until ready to build out those instructions
-	updateDisplay(Display);
+	    // in the future execution will updateDisplay and or close window
+	    // for testing I will leave updateDisplay in loop seperate
+	    // until ready to build out those instructions
+	    updateDisplay(Display);
     }
 
     CloseWindow();
