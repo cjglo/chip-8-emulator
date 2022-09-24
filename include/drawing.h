@@ -14,6 +14,5 @@
 // func stubs
 void createWindow();
 void updateDisplay(bool display[DISPLAY_HEIGHT][DISPLAY_WIDTH]);
-void closeDisplay();
 
 #endif

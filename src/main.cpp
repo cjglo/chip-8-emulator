@@ -22,11 +22,16 @@ int main() {
     updateDisplay(Display);
     bool shutdownCommandWasCalled = false; // not sure how I feel about this, maybe a better way by calling raylib close
 
-    while(!WindowShouldClose && !shutdownCommandWasCalled) { // WindowShouldClose is raylib func that returns true on ESC or close button
+    while(!WindowShouldClose() && !shutdownCommandWasCalled) { // WindowShouldClose is raylib func that returns true on ESC or close button
         // execution loop:
             // fetch
             // decode
             // execute
+	
+	// in the future execution will updateDisplay and or close window
+	// for testing I will leave updateDisplay in loop seperate
+	// until ready to build out those instructions
+	updateDisplay(Display);
     }
 
     CloseWindow();
