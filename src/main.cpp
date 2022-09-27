@@ -12,8 +12,8 @@ int main() {
     uint16_t Stack[STACK_SIZE];
     uint8_t DelayTimer = 255;
     uint8_t SoundTimer = 255;
-    uint10_struct PC;
-    PC.bits = 0;
+    uint12_struct PC;
+    PC.bits = STARTING_REGISTER;
     uint16_t IRegister = 0;
 
     // TODO: Init Front Sprite data in Memory between 50...9F
@@ -25,6 +25,8 @@ int main() {
     while(!WindowShouldClose() && !shutdownCommandWasCalled) { // WindowShouldClose is raylib func that returns true on ESC or close button
         // execution loop:
             // fetch
+            uint16_t instruction = fetch(PC, Memory);
+            
             // decode
             // execute
 	
@@ -32,6 +34,7 @@ int main() {
 	    // for testing I will leave updateDisplay in loop seperate
 	    // until ready to build out those instructions
 	    updateDisplay(Display);
+	    sleep(CLOCK_EXECUTION_DELAY); 
     }
 
     CloseWindow();
