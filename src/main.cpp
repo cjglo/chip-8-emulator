@@ -4,17 +4,20 @@ int main() {
 
     // Initialize all virtual hardware
     uint8_t Memory[MEMORY_SIZE];
+    initialize_memory(Memory);
     bool Display[DISPLAY_HEIGHT][DISPLAY_WIDTH];
+    uint16_t Stack[STACK_SIZE];
+    uint8_t DelayTimer = 255;
+    uint8_t SoundTimer = 255;
+    uint12_struct PC;
+    PC.bits = STARTING_REGISTER;
+    uint16_t IRegister = 0;
+
+    // Set Diplay to blank
 	for(int i = 0; i<DISPLAY_HEIGHT; i++)
 		for(int j = 0; j<DISPLAY_WIDTH; j++) {
             Display[i][j] = false;
 		}
-    uint16_t Stack[STACK_SIZE];
-    uint8_t DelayTimer = 255;
-    uint8_t SoundTimer = 255;
-    uint10_struct PC;
-    PC.bits = 0;
-    uint16_t IRegister = 0;
 
     // TODO: Init Front Sprite data in Memory between 50...9F
 
@@ -25,6 +28,8 @@ int main() {
     while(!WindowShouldClose() && !shutdownCommandWasCalled) { // WindowShouldClose is raylib func that returns true on ESC or close button
         // execution loop:
             // fetch
+            uint16_t instruction = fetch(PC, Memory);
+            
             // decode
             // execute
 	
@@ -32,8 +37,13 @@ int main() {
 	    // for testing I will leave updateDisplay in loop seperate
 	    // until ready to build out those instructions
 	    updateDisplay(Display);
+	    sleep(CLOCK_EXECUTION_DELAY); 
     }
 
     CloseWindow();
     return 0;
+}
+
+void initialize_memory(uint8_t memory[MEMORY_SIZE]) {
+    // TODO: Load program here I believe
 }
