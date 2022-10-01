@@ -4,17 +4,20 @@ int main() {
 
     // Initialize all virtual hardware
     uint8_t Memory[MEMORY_SIZE];
+    initialize_memory(Memory);
     bool Display[DISPLAY_HEIGHT][DISPLAY_WIDTH];
-	for(int i = 0; i<DISPLAY_HEIGHT; i++)
-		for(int j = 0; j<DISPLAY_WIDTH; j++) {
-            Display[i][j] = false;
-		}
     uint16_t Stack[STACK_SIZE];
     uint8_t DelayTimer = 255;
     uint8_t SoundTimer = 255;
     uint12_struct PC;
     PC.bits = STARTING_REGISTER;
     uint16_t IRegister = 0;
+
+    // Set Diplay to blank
+	for(int i = 0; i<DISPLAY_HEIGHT; i++)
+		for(int j = 0; j<DISPLAY_WIDTH; j++) {
+            Display[i][j] = false;
+		}
 
     // TODO: Init Front Sprite data in Memory between 50...9F
 
@@ -39,4 +42,8 @@ int main() {
 
     CloseWindow();
     return 0;
+}
+
+void initialize_memory(uint8_t memory[MEMORY_SIZE]) {
+    // TODO: Load program here I believe
 }

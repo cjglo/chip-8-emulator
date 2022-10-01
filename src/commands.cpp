@@ -2,8 +2,6 @@
 
 using namespace std;
 
-class DebugTestCommand : Command {
-    void execute() {
-        cout<<"INVALID COMMAND, TESTING ONLY"<<endl;
-    }
-};
+void DebugTestCommand::execute() {
+    cout<<"INVALID COMMAND, TESTING ONLY"<<endl;
+}

@@ -14,15 +14,18 @@
 #include <iostream>
 #include <unistd.h>
 
-// internal files
-#include "commands.h"
-#include "drawing.h"
-#include "fetch.h"
-
 // emulator types
 struct uint12_struct
 {
     u_int16_t bits : 12;
 };
+
+// internal files
+#include "commands.h"
+#include "drawing.h"
+#include "fetch.h"
+
+// functions in main
+void initialize_memory(uint8_t memory[MEMORY_SIZE]); 
 
 #endif
