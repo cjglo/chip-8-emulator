@@ -21,8 +21,6 @@ int main() {
             Display[i][j] = false;
 		}
 
-    // TODO: Init Front Sprite data in Memory between 50...9F
-
     createWindow();
     updateDisplay(Display);
     bool shutdownCommandWasCalled = false; // not sure how I feel about this, maybe a better way by calling raylib close
