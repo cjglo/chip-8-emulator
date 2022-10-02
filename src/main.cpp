@@ -1,11 +1,13 @@
 #include "../include/main.h"
 
 int main() {
-
     // Initialize all virtual hardware
     uint8_t Memory[MEMORY_SIZE];
-    initialize_memory(Memory);
+    initializeMemory(Memory);
     bool Display[DISPLAY_HEIGHT][DISPLAY_WIDTH];
+    uint8_t fontData[FONT_DATA_SIZE] = FONT_DATA;
+    initializeFontInMemory(Memory, fontData);
+
     uint16_t Stack[STACK_SIZE];
     uint8_t DelayTimer = 255;
     uint8_t SoundTimer = 255;
@@ -44,6 +46,12 @@ int main() {
     return 0;
 }
 
-void initialize_memory(uint8_t memory[MEMORY_SIZE]) {
+void initializeFontInMemory(uint8_t memory[MEMORY_SIZE], uint8_t fontData[FONT_DATA_SIZE]) {
+    for(int i = 0; i<FONT_DATA_SIZE; i++) {
+        memory[i+FONT_DATA_START] = fontData[i];
+    }
+}
+
+void initializeMemory(uint8_t memory[MEMORY_SIZE]) {
     // TODO: Load program here I believe
 }
