@@ -2,6 +2,15 @@
 
 using namespace std;
 
-void DebugTestCommand::execute() {
-    cout<<"INVALID COMMAND, TESTING ONLY"<<endl;
+void ClearScreenCommand::execute(uint8_t* memory, bool** display, uint16_t* stack, uint12_struct pc, uint16_t ir) {
+    UNIMPLEMENTED_COMMAND_DEBUG_CALL
+}
+
+JumpCommand::JumpCommand(uint16_t instruction) {
+    uint12_struct address;
+    address.bits = instruction; // only 3 least significant bytes saved, last byte is removed
+    this->address = address;
+}
+void JumpCommand::execute(uint8_t* memory, bool** display, uint16_t* stack, uint12_struct pc, uint16_t ir) {
+    UNIMPLEMENTED_COMMAND_DEBUG_CALL
 }

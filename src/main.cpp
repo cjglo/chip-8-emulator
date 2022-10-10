@@ -25,7 +25,7 @@ int main() {
     updateDisplay(Display);
     bool shutdownCommandWasCalled = false; // not sure how I feel about this, maybe a better way by calling raylib close
 
-    while(!WindowShouldClose() && !shutdownCommandWasCalled) { // WindowShouldClose is raylib func that returns true on ESC or close button
+    while(!(WindowShouldClose() || shutdownCommandWasCalled)) { // WindowShouldClose is raylib func that returns true on ESC or close button
         // execution loop:
             // fetch
             uint16_t instruction = fetch(PC, Memory);
