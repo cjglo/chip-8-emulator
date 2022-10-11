@@ -10,13 +10,15 @@
 // abstract Commmand Class
 class Command {
     public:
-        virtual void execute(uint8_t* memory, bool** display, uint16_t* stack, uint12_struct pc, uint16_t ir) = 0;
+        // TODO: May want to change execute having every param. Could make this enum and make methods in execute
+        // stage but that would seperate Command from its method and not sure I like that either
+        virtual void execute(uint8_t* memory, bool display[DISPLAY_HEIGHT][DISPLAY_WIDTH], uint16_t* stack, uint12_struct pc, uint16_t ir) = 0;
 };
 
 // all instruction classes
 class ClearScreenCommand : public Command {
     public:
-        void execute(uint8_t* memory, bool** display, uint16_t* stack, uint12_struct pc, uint16_t ir);
+        void execute(uint8_t* memory, bool display[DISPLAY_HEIGHT][DISPLAY_WIDTH], uint16_t* stack, uint12_struct pc, uint16_t ir);
 };
 
 class JumpCommand : public Command {
@@ -26,7 +28,7 @@ class JumpCommand : public Command {
 
     public:
         JumpCommand(uint16_t intruction);
-        void execute(uint8_t* memory, bool** display, uint16_t* stack, uint12_struct pc, uint16_t ir);
+        void execute(uint8_t* memory, bool display[DISPLAY_HEIGHT][DISPLAY_WIDTH], uint16_t* stack, uint12_struct pc, uint16_t ir);
 };
 
 #endif

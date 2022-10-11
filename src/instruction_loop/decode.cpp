@@ -1,4 +1,4 @@
-#include "decode.h"
+#include "../../include/decode.h"
 
 Command* decode(u_int16_t instruction) {
 
