@@ -25,13 +25,19 @@ int main() {
     updateDisplay(Display);
     bool shutdownCommandWasCalled = false; // not sure how I feel about this, maybe a better way by calling raylib close
 
-    while(!WindowShouldClose() && !shutdownCommandWasCalled) { // WindowShouldClose is raylib func that returns true on ESC or close button
+    while(!(WindowShouldClose() || shutdownCommandWasCalled)) { // WindowShouldClose is raylib func that returns true on ESC or close button
         // execution loop:
             // fetch
             uint16_t instruction = fetch(PC, Memory);
             
             // decode
+            Command* command = decode(instruction);
+
             // execute
+            command->execute(Memory, Display, Stack, PC, IRegister);
+
+            // clean-up
+            delete command;
 	
 	    // in the future execution will updateDisplay and or close window
 	    // for testing I will leave updateDisplay in loop seperate
@@ -52,4 +58,12 @@ void initializeFontInMemory(uint8_t memory[MEMORY_SIZE], uint8_t fontData[FONT_D
 
 void initializeMemory(uint8_t memory[MEMORY_SIZE]) {
     // TODO: Load program here I believe
+
+    // FOR TESTING (Calls jump command, unimplemented)
+
+    for(int i = 0; i<MEMORY_SIZE; i++) {
+
+        memory[i] = (i % 2 == 0) ? 0x1F : 0xFF;
+
+    }
 }
