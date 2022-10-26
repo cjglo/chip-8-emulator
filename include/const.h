@@ -8,6 +8,7 @@
 #define STACK_SIZE 16
 #define STARTING_REGISTER 0x200
 #define CLOCK_EXECUTION_DELAY .0014 // CHIP-8 executes roughly 700 instructions/second
+#define TIMER_DELAY 0.016 // timers decrement 60 times per second
 
 // libaries
 #include <stdint.h>
