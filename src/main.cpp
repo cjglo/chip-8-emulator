@@ -36,13 +36,10 @@ int main() {
             uint16_t instruction = fetch(PC, Memory);
             
             // decode
-            Command* command = decode(instruction);
+            std::unique_ptr<Command> command = decode(instruction);
 
             // execute
             command->execute(Memory, Display, Stack, PC, IRegister);
-
-            // clean-up
-            delete command;
 	
 	    // in the future execution will updateDisplay and or close window
 	    // for testing I will leave updateDisplay in loop seperate

@@ -10,7 +10,7 @@ JumpCommand::JumpCommand(uint12_struct address) {
     this->address = address;
 }
 void JumpCommand::execute(uint8_t* memory, bool display[DISPLAY_HEIGHT][DISPLAY_WIDTH], uint16_t* stack, uint12_struct pc, uint16_t ir) {
-    cout<<"JUMPCOMMAND"<<endl;
+    cout<<"JUMPCOMMAND: "<<this->address.bits<<endl;
     UNIMPLEMENTED_COMMAND_DEBUG_CALL
 }
 

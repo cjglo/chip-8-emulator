@@ -2,6 +2,7 @@
 #define __MAIN_H__
 
 #include <thread>
+#include <memory>
 
 // internal files
 #include "const.h"
