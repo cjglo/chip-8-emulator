@@ -3,7 +3,9 @@
 using namespace std; // TODO: Remove after testing
 
 void ClearScreenCommand::execute(uint8_t* memory, bool display[DISPLAY_HEIGHT][DISPLAY_WIDTH], uint16_t* stack, uint12_struct pc, uint16_t ir) {
-    UNIMPLEMENTED_COMMAND_DEBUG_CALL
+    for(int i = 0; i<DISPLAY_HEIGHT; i++)
+        for(int j = 0; j<DISPLAY_WIDTH; j++) 
+            display[i][j] = false;
 }
 
 JumpCommand::JumpCommand(uint12_struct address) {

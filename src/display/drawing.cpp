@@ -5,6 +5,7 @@ void createWindow() {
 	SetTargetFPS(60);
 }
 
+// NOTE: depricated func, could leave so can test, but clear screen works so not needed?
 void updateDisplay(bool display[DISPLAY_HEIGHT][DISPLAY_WIDTH]) {
 	BeginDrawing();
 	ClearBackground(BLACK);

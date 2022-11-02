@@ -17,18 +17,13 @@ int main() {
     PC.bits = STARTING_REGISTER;
     uint16_t IRegister = 0;
 
-    // Set Diplay to blank
-	for(int i = 0; i<DISPLAY_HEIGHT; i++)
-		for(int j = 0; j<DISPLAY_WIDTH; j++) {
-            Display[i][j] = false;
-		}
-    
     // Starting timers, they execute independent of exec cycle
     std::thread delayTimerRoutine(delayTimerCycle, &DelayTimer, &delayTimerOnSwitch);
     std::thread soundTimerRoutine(soundTimerCycle, &SoundTimer, &soundTimerOnSwitch);
 
     createWindow();
-    updateDisplay(Display);
+    
+    // updateDisplay(Display); // NOTE: Not needed, but could uncomment for testing
 
     while(!WindowShouldClose()) { // WindowShouldClose is raylib func that returns true on ESC or close button
         // execution loop:
@@ -71,7 +66,7 @@ void initializeMemory(uint8_t memory[MEMORY_SIZE]) {
     // FOR TESTING (Calls jump command, unimplemented)
     for(int i = 0; i<MEMORY_SIZE; i++) {
 
-        memory[i] = (i % 2 == 0) ? 0x1F : 0xFF;
+        memory[i] = (i % 2 == 0) ? 0x00 : 0xE0;
 
     }
 }
