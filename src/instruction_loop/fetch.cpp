@@ -1,6 +1,6 @@
 #include "../../include/fetch.h"
 
-u_int16_t fetch(uint12_struct &pc, uint8_t memory[MEMORY_SIZE]) {
+auto fetch(uint12_struct &pc, uint8_t memory[MEMORY_SIZE]) -> uint16_t {
 
     u_int16_t ps_address = pc.bits;
 
