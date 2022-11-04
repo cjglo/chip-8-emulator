@@ -12,7 +12,7 @@
 #define WINDOW_LENGTH 640
 
 // func stubs
-void createWindow();
-void updateDisplay(bool display[DISPLAY_HEIGHT][DISPLAY_WIDTH]);
+auto createWindow() -> void;
+auto updateDisplay(bool display[DISPLAY_HEIGHT][DISPLAY_WIDTH]) -> void;
 
 #endif

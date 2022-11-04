@@ -3,7 +3,7 @@
 
 #include "main.h"
 
-u_int16_t fetch(uint12_struct &pc, uint8_t memory[MEMORY_SIZE]);
+auto fetch(uint12_struct &pc, uint8_t memory[MEMORY_SIZE]) -> uint16_t;
 
 #endif
 
