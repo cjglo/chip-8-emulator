@@ -1,11 +1,11 @@
 #include "../../include/drawing.h"
 
-void createWindow() {
+auto createWindow() -> void {
     InitWindow(WINDOW_LENGTH, WINDOW_HEIGHT, "CHIP-8");
 	SetTargetFPS(60);
 }
 
-void updateDisplay(bool display[DISPLAY_HEIGHT][DISPLAY_WIDTH]) {
+auto updateDisplay(bool display[DISPLAY_HEIGHT][DISPLAY_WIDTH]) -> void {
 	BeginDrawing();
 	ClearBackground(BLACK);
 	for(int i = 0; i<DISPLAY_HEIGHT; i++)

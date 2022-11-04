@@ -12,13 +12,19 @@ class Command {
     public:
         // TODO: May want to change execute having every param. Could make this enum and make methods in execute
         // stage but that would seperate Command from its method and not sure I like that either
-        virtual void execute(uint8_t* memory, bool display[DISPLAY_HEIGHT][DISPLAY_WIDTH], uint16_t* stack, uint12_struct pc, uint16_t ir) = 0;
+        virtual auto execute(
+            uint8_t* memory, bool display[DISPLAY_HEIGHT][DISPLAY_WIDTH], 
+            uint16_t* stack, uint12_struct pc, uint16_t ir
+        ) -> void = 0;
 };
 
 // all instruction classes
 class ClearScreenCommand : public Command {
     public:
-        void execute(uint8_t* memory, bool display[DISPLAY_HEIGHT][DISPLAY_WIDTH], uint16_t* stack, uint12_struct pc, uint16_t ir);
+        auto execute(
+            uint8_t* memory, bool display[DISPLAY_HEIGHT][DISPLAY_WIDTH], 
+            uint16_t* stack, uint12_struct pc, uint16_t ir
+        ) -> void;
 };
 
 class JumpCommand : public Command {
@@ -28,7 +34,10 @@ class JumpCommand : public Command {
 
     public:
         JumpCommand(uint12_struct address);
-        void execute(uint8_t* memory, bool display[DISPLAY_HEIGHT][DISPLAY_WIDTH], uint16_t* stack, uint12_struct pc, uint16_t ir);
+        auto execute(
+            uint8_t* memory, bool display[DISPLAY_HEIGHT][DISPLAY_WIDTH], 
+            uint16_t* stack, uint12_struct pc, uint16_t ir
+        ) -> void;
 };
 
 class SetRegister : public Command {
@@ -39,7 +48,10 @@ class SetRegister : public Command {
     
     public:
         SetRegister(uint8_t selected_register, uint8_t value_to_set); 
-        void execute(uint8_t* memory, bool display[DISPLAY_HEIGHT][DISPLAY_WIDTH], uint16_t* stack, uint12_struct pc, uint16_t ir);
+        auto execute(
+            uint8_t* memory, bool display[DISPLAY_HEIGHT][DISPLAY_WIDTH], 
+            uint16_t* stack, uint12_struct pc, uint16_t ir
+        ) -> void;
 };
 
 class AddValueToRegister : public Command {
@@ -49,7 +61,10 @@ class AddValueToRegister : public Command {
 
     public:
         AddValueToRegister(uint8_t selected_register, uint8_t value_to_add);
-        void execute(uint8_t* memory, bool display[DISPLAY_HEIGHT][DISPLAY_WIDTH], uint16_t* stack, uint12_struct pc, uint16_t ir);
+        auto execute(
+            uint8_t* memory, bool display[DISPLAY_HEIGHT][DISPLAY_WIDTH], 
+            uint16_t* stack, uint12_struct pc, uint16_t ir
+        ) -> void;
 };
 
 class SetIndexRegister : public Command {
@@ -58,7 +73,10 @@ class SetIndexRegister : public Command {
     
     public:
         SetIndexRegister(uint12_struct i_register_address);
-        void execute(uint8_t* memory, bool display[DISPLAY_HEIGHT][DISPLAY_WIDTH], uint16_t* stack, uint12_struct pc, uint16_t ir);
+        auto execute(
+            uint8_t* memory, bool display[DISPLAY_HEIGHT][DISPLAY_WIDTH], 
+            uint16_t* stack, uint12_struct pc, uint16_t ir
+        ) -> void;
 };
 
 class DisplayDraw : public Command {
@@ -69,7 +87,10 @@ class DisplayDraw : public Command {
 
     public:
         DisplayDraw(uint8_t x, uint8_t y, uint8_t height); 
-        void execute(uint8_t* memory, bool display[DISPLAY_HEIGHT][DISPLAY_WIDTH], uint16_t* stack, uint12_struct pc, uint16_t ir);
+        auto execute(
+            uint8_t* memory, bool display[DISPLAY_HEIGHT][DISPLAY_WIDTH], 
+            uint16_t* stack, uint12_struct pc, uint16_t ir
+        ) -> void;
 };
 
 class InvalidCommand : public Command {
@@ -78,7 +99,10 @@ class InvalidCommand : public Command {
 
     public:
         InvalidCommand(uint16_t instruction); 
-        void execute(uint8_t* memory, bool display[DISPLAY_HEIGHT][DISPLAY_WIDTH], uint16_t* stack, uint12_struct pc, uint16_t ir);
+        auto execute(
+            uint8_t* memory, bool display[DISPLAY_HEIGHT][DISPLAY_WIDTH], 
+            uint16_t* stack, uint12_struct pc, uint16_t ir
+        ) -> void;
 };
 
 #endif

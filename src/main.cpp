@@ -57,13 +57,13 @@ int main() {
     return 0;
 }
 
-void initializeFontInMemory(uint8_t memory[MEMORY_SIZE], uint8_t fontData[FONT_DATA_SIZE]) {
+auto initializeFontInMemory(uint8_t memory[MEMORY_SIZE], uint8_t fontData[FONT_DATA_SIZE]) -> void {
     for(int i = 0; i<FONT_DATA_SIZE; i++) {
         memory[i+FONT_DATA_START] = fontData[i];
     }
 }
 
-void initializeMemory(uint8_t memory[MEMORY_SIZE]) {
+auto initializeMemory(uint8_t memory[MEMORY_SIZE]) -> void {
     // TODO: Load program here I believe
     // FOR TESTING (Calls jump command, unimplemented)
     for(int i = 0; i<MEMORY_SIZE; i++) {
@@ -74,7 +74,7 @@ void initializeMemory(uint8_t memory[MEMORY_SIZE]) {
 }
 
 // NOTE: Timers are currently dependent on WindowShouldClose, which is external.  Maybe should pass as parameter?
-void delayTimerCycle(uint8_t* timer, bool* onSwitch) {
+auto delayTimerCycle(uint8_t* timer, bool* onSwitch) -> void {
     while(true) {
         sleep(TIMER_DELAY);
         if(*timer == 0) {
@@ -86,7 +86,7 @@ void delayTimerCycle(uint8_t* timer, bool* onSwitch) {
     }
 }
 
-void soundTimerCycle(uint8_t* timer, bool* onSwitch) {
+auto soundTimerCycle(uint8_t* timer, bool* onSwitch) -> void {
     while(true) {
         sleep(TIMER_DELAY);
         if(*timer == 0) {
