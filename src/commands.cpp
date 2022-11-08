@@ -18,8 +18,7 @@ auto JumpCommand::execute(
     uint8_t* memory, bool display[DISPLAY_HEIGHT][DISPLAY_WIDTH], 
     uint16_t* stack, uint12_struct pc, uint16_t ir
 ) -> void {
-    cout<<"JUMPCOMMAND: "<<this->address.bits<<endl;
-    UNIMPLEMENTED_COMMAND_DEBUG_CALL
+    pc.bits = this->address.bits;
 }
 
 SetRegister::SetRegister(uint8_t selected_register, uint8_t value_to_set) {
@@ -30,8 +29,10 @@ auto SetRegister::execute(
     uint8_t* memory, bool display[DISPLAY_HEIGHT][DISPLAY_WIDTH], 
     uint16_t* stack, uint12_struct pc, uint16_t ir
 ) -> void {
-    cout<<"SET REGISTER COMMAND"<<endl;
-    UNIMPLEMENTED_COMMAND_DEBUG_CALL
+
+        
+
+
 }
 
 AddValueToRegister::AddValueToRegister(uint8_t selected_register, uint8_t value_to_add) {
