@@ -58,11 +58,9 @@ auto initializeFontInMemory(uint8_t memory[MEMORY_SIZE], uint8_t fontData[FONT_D
 
 auto initializeMemory(uint8_t memory[MEMORY_SIZE]) -> void {
     // TODO: Load program here I believe
-    // FOR TESTING (Calls jump command, unimplemented)
+    // FOR TESTING
     for(int i = 0; i<MEMORY_SIZE; i++) {
-
-        memory[i] = (i % 2 == 0) ? 0x1F : 0xFF;
-
+        memory[i] = (i % 2 == 0) ? 0x6F : 0x12;
     }
 }
 

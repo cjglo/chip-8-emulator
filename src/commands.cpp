@@ -32,8 +32,8 @@ auto SetRegister::execute(
     uint16_t* stack, uint8_t varRegister[VARIABLE_REGISTERS_SIZE],
     uint12_struct pc, uint16_t ir
 ) -> void {
-
-
+    // selected_register should be 4 bits max
+    varRegister[selected_register] = value_to_set;
 }
 
 AddValueToRegister::AddValueToRegister(uint8_t selected_register, uint8_t value_to_add) {
