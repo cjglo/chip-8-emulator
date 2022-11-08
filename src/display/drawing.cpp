@@ -5,6 +5,7 @@ auto createWindow() -> void {
 	SetTargetFPS(60);
 }
 
+
 auto updateDisplay(bool display[DISPLAY_HEIGHT][DISPLAY_WIDTH]) -> void {
 	BeginDrawing();
 	ClearBackground(BLACK);

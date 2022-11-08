@@ -7,6 +7,7 @@
 #define MEMORY_SIZE 4096
 #define STACK_SIZE 16
 #define STARTING_REGISTER 0x200
+#define VARIABLE_REGISTERS_SIZE 16
 #define CLOCK_EXECUTION_DELAY .0014 // CHIP-8 executes roughly 700 instructions/second
 #define TIMER_DELAY 0.016 // timers decrement 60 times per second
 

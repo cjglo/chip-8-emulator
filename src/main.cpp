@@ -2,33 +2,28 @@
 
 int main() {
     // Initialize all virtual hardware
-    uint8_t Memory[MEMORY_SIZE];
+    uint8_t Memory[MEMORY_SIZE]; // Memory
     initializeMemory(Memory);
-    bool Display[DISPLAY_HEIGHT][DISPLAY_WIDTH];
-    uint8_t fontData[FONT_DATA_SIZE] = FONT_DATA;
+    bool Display[DISPLAY_HEIGHT][DISPLAY_WIDTH]; // Display
+    uint8_t fontData[FONT_DATA_SIZE] = FONT_DATA; // Font
     initializeFontInMemory(Memory, fontData);
-
-    uint16_t Stack[STACK_SIZE];
-    uint8_t DelayTimer = 255;
-    uint8_t SoundTimer = 255;
+    uint16_t Stack[STACK_SIZE]; // Stack
+    uint8_t DelayTimer = 255; // Delay Timer
+    uint8_t SoundTimer = 255; // Sound Timer
     bool delayTimerOnSwitch = true;
     bool soundTimerOnSwitch = true;
-    uint12_struct PC;
+    uint12_struct PC; // Program Counter
     PC.bits = STARTING_REGISTER;
-    uint16_t IRegister = 0;
+    uint16_t IR = 0; // Index Register
+    uint8_t varRegisters[VARIABLE_REGISTERS_SIZE]; // Variable Registers
 
-    // Set Diplay to blank
-	for(int i = 0; i<DISPLAY_HEIGHT; i++)
-		for(int j = 0; j<DISPLAY_WIDTH; j++) {
-            Display[i][j] = false;
-		}
-    
     // Starting timers, they execute independent of exec cycle
     std::thread delayTimerRoutine(delayTimerCycle, &DelayTimer, &delayTimerOnSwitch);
     std::thread soundTimerRoutine(soundTimerCycle, &SoundTimer, &soundTimerOnSwitch);
 
     createWindow();
-    updateDisplay(Display);
+    
+    // updateDisplay(Display); // NOTE: Not needed, but could uncomment for testing
 
     while(!WindowShouldClose()) { // WindowShouldClose is raylib func that returns true on ESC or close button
         // execution loop:
@@ -39,7 +34,7 @@ int main() {
             std::unique_ptr<Command> command = decode(instruction);
 
             // execute
-            command->execute(Memory, Display, Stack, PC, IRegister);
+            command->execute(Memory, Display, Stack, varRegisters, PC, IR);
 	
 	    // in the future execution will updateDisplay and or close window
 	    // for testing I will leave updateDisplay in loop seperate
