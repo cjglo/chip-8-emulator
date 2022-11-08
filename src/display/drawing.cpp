@@ -6,7 +6,6 @@ auto createWindow() -> void {
 }
 
 
-// NOTE: depricated func, could leave so can test, but clear screen works so not needed?
 auto updateDisplay(bool display[DISPLAY_HEIGHT][DISPLAY_WIDTH]) -> void {
 	BeginDrawing();
 	ClearBackground(BLACK);
