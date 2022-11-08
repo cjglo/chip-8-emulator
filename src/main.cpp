@@ -23,8 +23,6 @@ int main() {
 
     createWindow();
     
-    // updateDisplay(Display); // NOTE: Not needed, but could uncomment for testing
-
     while(!WindowShouldClose()) { // WindowShouldClose is raylib func that returns true on ESC or close button
         // execution loop:
             // fetch
