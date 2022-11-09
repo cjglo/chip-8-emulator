@@ -27,7 +27,7 @@ auto decode(uint16_t instruction) -> std::unique_ptr<Command> {
         {
             uint8_t  selected_register = (instruction & 0x0F00) >> 8; // first 4 bits after the 7
             uint8_t  value = instruction; // last 8 bits (since rest will be cut off)
-            command = std::make_unique<SetRegister>(selected_register, value);
+            command = std::make_unique<AddValueToRegister>(selected_register, value);
             break;
         }
         case 0xA000 ... 0xAFFF:
