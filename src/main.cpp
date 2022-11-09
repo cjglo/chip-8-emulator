@@ -66,7 +66,7 @@ auto initializeMemory(uint8_t memory[MEMORY_SIZE]) -> void
     // FOR TESTING
     for (int i = 0; i < MEMORY_SIZE; i++)
     {
-        memory[i] = (i % 2 == 0) ? 0x7F : 0x12;
+        memory[i] = (i % 2 == 0) ? 0xAF : 0x12;
     }
 }
 
