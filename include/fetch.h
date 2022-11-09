@@ -6,4 +6,3 @@
 auto fetch(uint12_struct &pc, uint8_t memory[MEMORY_SIZE]) -> uint16_t;
 
 #endif
-
