@@ -45,8 +45,7 @@ auto AddValueToRegister::execute(
     uint16_t* stack, uint8_t varRegister[VARIABLE_REGISTERS_SIZE],
     uint12_struct pc, uint16_t ir
 ) -> void {
-    cout<<"ADD REGISTER COMMAND"<<endl;
-    UNIMPLEMENTED_COMMAND_DEBUG_CALL
+    varRegister[selected_register] += value_to_add;
 }
 
 SetIndexRegister::SetIndexRegister(uint12_struct i_register_address) {
