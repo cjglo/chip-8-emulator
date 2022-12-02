@@ -88,5 +88,5 @@ auto InvalidCommand::execute(
     uint12_struct *pc, uint16_t *ir) -> void
 {
 
-    throw std::invalid_argument("Invalid Command's Execute Called, instruction value was: " + to_string(this->instruction));
+    throw std::invalid_argument("InvalidCommand's Execute() Called, instruction value was: " + to_string(this->instruction));
 }
