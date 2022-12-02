@@ -1,3 +1,6 @@
+#ifndef __FONTS_H__
+#define __FONTS_H__
+
 #include <stdint.h>
 
 // Font Data
@@ -23,3 +26,5 @@
     0xF0, 0x80, 0xF0, 0x80, 0xF0,  \
     0xF0, 0x80, 0xF0, 0x80, 0x80   \
 };
+
+#endif
