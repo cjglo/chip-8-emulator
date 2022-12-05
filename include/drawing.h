@@ -5,7 +5,7 @@
 #include "raylib.h"
 
 // internal files
-#include "main.h"
+#include "const.h"
 
 // constants
 #define WINDOW_HEIGHT 320

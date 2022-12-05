@@ -75,7 +75,36 @@ auto DisplayDraw::execute(
     uint12_struct *pc, uint16_t *ir) -> void
 {
     cout << "Display/Draw" << endl;
-    UNIMPLEMENTED_COMMAND_DEBUG_CALL
+    // modulo with screen demensions because values can wrap around
+    const uint8_t x = varRegister[this->register_for_x_coordinate] % DISPLAY_WIDTH;
+    const uint8_t y = varRegister[this->register_for_y_coordinate] % DISPLAY_HEIGHT;
+    // VF flag set to 0
+    varRegister[0xF] = 0;
+
+    for(int i = 0; i<this->drawing_height; i++) {
+        uint8_t spriteByte = memory[*ir];
+
+        // stop if hit bottom edge of screen
+        if(i + y >= DISPLAY_HEIGHT)
+            break;
+
+        for(int j = 0; j<SPRITE_WIDTH; j++) {
+
+            // if reach end of screen, stop this row
+            if(j + x >= DISPLAY_WIDTH)
+                break;
+
+            if(display[y][j + x] && (spriteByte & (1 << 7 - j))) {
+                varRegister[0xF] = 1;
+                display[y][j + x] = 0;
+            } 
+            else if(!display[y][j + x] && (spriteByte & (1 << 7 - j))) {
+                display[y][j + x] = 1;
+            }
+        }
+    }
+
+    updateDisplay(display);
 }
 
 InvalidCommand::InvalidCommand(uint16_t instruction)

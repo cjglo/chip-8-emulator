@@ -10,6 +10,7 @@
 #include "drawing.h"
 #include "fetch.h"
 #include "decode.h"
+#include "fonts.h"
 
 // functions in main
 auto initializeFontInMemory(uint8_t memory[MEMORY_SIZE], uint8_t fontData[FONT_DATA_SIZE]) -> void;
