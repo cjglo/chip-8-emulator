@@ -6,7 +6,7 @@ build: ${ROOT_TO_SOURCE_FILES}
 	cd src && g++ ${SOURCE_FILES} ${LIBRARIES}
 
 run: src/a.out
-	cd src && ./a.out
+	cd src && ./a.out $(arg)
 
 clean:
 	rm src/a.out
