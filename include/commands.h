@@ -2,6 +2,7 @@
 #define __COMMANDS_H__
 
 #include "const.h"
+#include "drawing.h"
 #include <stdint.h>
 
 // testing and debugging
