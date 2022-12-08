@@ -1,10 +1,9 @@
 #include "../include/main.h"
 
-int main()
+int main(int argc, char* argv[])
 {
     // Initialize all virtual hardware
     uint8_t Memory[MEMORY_SIZE];                    // Memory
-    initializeMemory(Memory);
     bool Display[DISPLAY_HEIGHT][DISPLAY_WIDTH];    // Display
     uint8_t fontData[FONT_DATA_SIZE] = FONT_DATA;   // Font
     initializeFontInMemory(Memory, fontData);
@@ -17,6 +16,13 @@ int main()
     PC.bits = STARTING_REGISTER;
     uint16_t IR = 0;                                // Index Register
     uint8_t varRegisters[VARIABLE_REGISTERS_SIZE];  // Variable Registers
+
+    for (int i = 0; i < DISPLAY_HEIGHT; i++)
+        for (int j = 0; j < DISPLAY_WIDTH; j++)
+            Display[i][j] = false;
+
+    // Read in Program from file in command line arguement
+    initializeMemory(argc, argv, Memory);
 
     // Starting timers, they execute independent of exec cycle
     std::thread delayTimerRoutine(delayTimerCycle, &DelayTimer, &delayTimerOnSwitch);
@@ -56,14 +62,30 @@ auto initializeFontInMemory(uint8_t memory[MEMORY_SIZE], uint8_t fontData[FONT_D
     }
 }
 
-auto initializeMemory(uint8_t memory[MEMORY_SIZE]) -> void
+auto initializeMemory(int argc, char** argv, uint8_t memory[MEMORY_SIZE]) -> void
 {
-    // TODO: Load program here I believe
-    // FOR TESTING
-    for (int i = 0; i < MEMORY_SIZE; i++)
-    {
-        memory[i] = (i % 2 == 0) ? 0x1F : 0x12;
+    std::ifstream program;
+
+    if(argc > 1) {
+        // TODO: Load in command line program
+        std::cout << "COMMAND LINE ARGUEMENTS ARE CURRENTLY NOT IMPLEMENTED!" << std::endl;
+        exit(1);
+    } else {
+        // defaults to IBM Program if no agruement passed
+        program = std::ifstream(DEFAULT_PROG_FILE_NAME, std::ios::binary | std::ios::ate);
     }
+
+    std::streampos size = program.tellg();
+    char* buffer = new char[size];
+    program.seekg(0, std::ios::beg);
+    program.read(buffer, size);
+    program.close();
+
+    for(int i = 0; i<size; i++) {
+        memory[STARTING_REGISTER + i] = buffer[i];
+    }
+
+    delete[] buffer; 
 }
 
 // NOTE: Timers are currently dependent on WindowShouldClose, which is external.  Maybe should pass as parameter?

@@ -12,8 +12,6 @@
 class Command
 {
 public:
-    // TODO: May want to change execute having every param. Could make this enum and make methods in execute
-    // stage but that would seperate Command from its method and not sure I like that either
     virtual auto execute(
         uint8_t *memory, bool display[DISPLAY_HEIGHT][DISPLAY_WIDTH],
         uint16_t *stack, uint8_t varRegisters[VARIABLE_REGISTERS_SIZE],
