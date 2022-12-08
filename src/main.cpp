@@ -67,7 +67,7 @@ auto initializeMemory(int argc, char** argv, uint8_t memory[MEMORY_SIZE]) -> voi
     std::ifstream program;
 
     if(argc > 1) {
-        // TODO: Load in Program
+        // TODO: Load in command line program
         std::cout << "COMMAND LINE ARGUEMENTS ARE CURRENTLY NOT IMPLEMENTED!" << std::endl;
         exit(1);
     } else {
