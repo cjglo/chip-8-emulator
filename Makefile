@@ -10,3 +10,10 @@ run: src/a.out
 
 clean:
 	rm src/a.out
+
+all:
+	make clean
+	printf "\n"
+	make build
+	printf "\n\n"
+	make run

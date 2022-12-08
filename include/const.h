@@ -11,7 +11,7 @@
 #define VARIABLE_REGISTERS_SIZE 16
 #define CLOCK_EXECUTION_DELAY .0014 // CHIP-8 executes roughly 700 instructions/second
 #define TIMER_DELAY 0.016 // timers decrement 60 times per second
-#define DEFAULT_PROG_FILE_NAME "ibmlogo.ch8"
+#define DEFAULT_PROG_FILE_NAME "../ibmlogo.ch8"
 
 // libaries
 #include <stdint.h>

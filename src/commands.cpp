@@ -1,6 +1,6 @@
 #include "../include/commands.h"
 
-using namespace std; // TODO: Remove after testing
+using namespace std; // TODO: Remove once program is complete, here for testing purposes
 
 auto ClearScreenCommand::execute(
     uint8_t *memory, bool display[DISPLAY_HEIGHT][DISPLAY_WIDTH],
@@ -74,7 +74,6 @@ auto DisplayDraw::execute(
     uint16_t *stack, uint8_t varRegister[VARIABLE_REGISTERS_SIZE],
     uint12_struct *pc, uint16_t *ir) -> void
 {
-    cout << "Display/Draw" << endl;
     // modulo with screen demensions because values can wrap around
     const uint8_t x = varRegister[this->register_for_x_coordinate] % DISPLAY_WIDTH;
     const uint8_t y = varRegister[this->register_for_y_coordinate] % DISPLAY_HEIGHT;
@@ -82,7 +81,7 @@ auto DisplayDraw::execute(
     varRegister[0xF] = 0;
 
     for(int i = 0; i<this->drawing_height; i++) {
-        uint8_t spriteByte = memory[*ir];
+        uint8_t spriteByte = memory[*ir + i];
 
         // stop if hit bottom edge of screen
         if(i + y >= DISPLAY_HEIGHT)
@@ -94,12 +93,12 @@ auto DisplayDraw::execute(
             if(j + x >= DISPLAY_WIDTH)
                 break;
 
-            if(display[y][j + x] && (spriteByte & (1 << 7 - j))) {
+            if(display[y + i][j + x] && (spriteByte & (1 << 7 - j))) {
                 varRegister[0xF] = 1;
-                display[y][j + x] = 0;
+                display[y + i][j + x] = 0;
             } 
-            else if(!display[y][j + x] && (spriteByte & (1 << 7 - j))) {
-                display[y][j + x] = 1;
+            else if(!display[y + i][j + x] && (spriteByte & (1 << 7 - j))) {
+                display[y + i][j + x] = 1;
             }
         }
     }
