@@ -29,6 +29,7 @@ int main(int argc, char* argv[])
     std::thread soundTimerRoutine(soundTimerCycle, &SoundTimer, &soundTimerOnSwitch);
 
     createWindow();
+    sleep(START_UP_DELAY);
 
     while (!WindowShouldClose())
     {   // WindowShouldClose is raylib func that returns true on ESC or close button
