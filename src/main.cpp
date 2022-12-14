@@ -31,9 +31,9 @@ int main(int argc, char* argv[])
     createWindow();
     sleep(START_UP_DELAY);
 
-    while (!WindowShouldClose())
-    {   // WindowShouldClose is raylib func that returns true on ESC or close button
-        // ---- execution loop ----
+    while (!WindowShouldClose()) // WindowShouldClose is raylib func that returns true on ESC or close button
+    {   
+        // ==== execution loop ====
         // fetch
         uint16_t instruction = fetch(PC, Memory);
 
