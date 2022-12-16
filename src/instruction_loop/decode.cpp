@@ -9,11 +9,21 @@ auto decode(uint16_t instruction) -> std::unique_ptr<Command> {
         case 0x00E0:
             command = std::make_unique<ClearScreenCommand>();
             break;
+        case 0x00EE:
+            command = std::make_unique<PopSubRoutine>();
+            break;
         case 0x1000 ... 0x1FFF: 
         {
             uint12_struct address;
             address.bits = instruction; // only 3 least significant bytes saved, last byte is removed
             command = std::make_unique<JumpCommand>(address);
+            break;
+        }
+        case 0x2000 ... 0x2FFF:
+        {
+            uint12_struct address;
+            address.bits = instruction; // only 3 least significant bytes saved, last byte is removed
+            command = std::make_unique<SubRoutines>(address);
             break;
         }
         case 0x6000 ... 0x6FFF:

@@ -4,12 +4,21 @@ using namespace std; // TODO: Remove once program is complete, here for testing 
 
 auto ClearScreenCommand::execute(
     uint8_t *memory, bool display[DISPLAY_HEIGHT][DISPLAY_WIDTH],
-    uint16_t *stack, uint8_t varRegister[VARIABLE_REGISTERS_SIZE],
+    std::vector<uint16_t>& stack, uint8_t varRegister[VARIABLE_REGISTERS_SIZE],
     uint12_struct *pc, uint16_t *ir) -> void
 {
     for (int i = 0; i < DISPLAY_HEIGHT; i++)
         for (int j = 0; j < DISPLAY_WIDTH; j++)
             display[i][j] = false;
+}
+
+auto PopSubRoutine::execute(
+    uint8_t *memory, bool display[DISPLAY_HEIGHT][DISPLAY_WIDTH],
+    std::vector<uint16_t>& stack, uint8_t varRegister[VARIABLE_REGISTERS_SIZE],
+    uint12_struct *pc, uint16_t *ir) -> void
+{
+    pc->bits = stack.back();
+    stack.pop_back();
 }
 
 JumpCommand::JumpCommand(uint12_struct address)
@@ -18,9 +27,22 @@ JumpCommand::JumpCommand(uint12_struct address)
 }
 auto JumpCommand::execute(
     uint8_t *memory, bool display[DISPLAY_HEIGHT][DISPLAY_WIDTH],
-    uint16_t *stack, uint8_t varRegister[VARIABLE_REGISTERS_SIZE],
+    std::vector<uint16_t>& stack, uint8_t varRegister[VARIABLE_REGISTERS_SIZE],
     uint12_struct *pc, uint16_t *ir) -> void
 {
+    pc->bits = this->address.bits;
+}
+
+SubRoutines::SubRoutines(uint12_struct subroutine_address)
+{
+    this->address = subroutine_address;
+}
+auto SubRoutines::execute(
+    uint8_t *memory, bool display[DISPLAY_HEIGHT][DISPLAY_WIDTH],
+    std::vector<uint16_t>& stack, uint8_t varRegister[VARIABLE_REGISTERS_SIZE],
+    uint12_struct *pc, uint16_t *ir) -> void
+{
+    stack.push_back(pc->bits);
     pc->bits = this->address.bits;
 }
 
@@ -31,7 +53,7 @@ SetRegister::SetRegister(uint8_t selected_register, uint8_t value_to_set)
 }
 auto SetRegister::execute(
     uint8_t *memory, bool display[DISPLAY_HEIGHT][DISPLAY_WIDTH],
-    uint16_t *stack, uint8_t varRegister[VARIABLE_REGISTERS_SIZE],
+    std::vector<uint16_t>& stack, uint8_t varRegister[VARIABLE_REGISTERS_SIZE],
     uint12_struct *pc, uint16_t *ir) -> void
 {
     // selected_register should be 4 bits max
@@ -45,7 +67,7 @@ AddValueToRegister::AddValueToRegister(uint8_t selected_register, uint8_t value_
 }
 auto AddValueToRegister::execute(
     uint8_t *memory, bool display[DISPLAY_HEIGHT][DISPLAY_WIDTH],
-    uint16_t *stack, uint8_t varRegister[VARIABLE_REGISTERS_SIZE],
+    std::vector<uint16_t>& stack, uint8_t varRegister[VARIABLE_REGISTERS_SIZE],
     uint12_struct *pc, uint16_t *ir) -> void
 {
     varRegister[selected_register] += value_to_add;
@@ -57,7 +79,7 @@ SetIndexRegister::SetIndexRegister(uint12_struct i_register_address)
 }
 auto SetIndexRegister::execute(
     uint8_t *memory, bool display[DISPLAY_HEIGHT][DISPLAY_WIDTH],
-    uint16_t *stack, uint8_t varRegister[VARIABLE_REGISTERS_SIZE],
+    std::vector<uint16_t>& stack, uint8_t varRegister[VARIABLE_REGISTERS_SIZE],
     uint12_struct *pc, uint16_t *ir) -> void
 {
     *ir = this->i_register_address.bits;
@@ -71,7 +93,7 @@ DisplayDraw::DisplayDraw(uint8_t x, uint8_t y, uint8_t height)
 }
 auto DisplayDraw::execute(
     uint8_t *memory, bool display[DISPLAY_HEIGHT][DISPLAY_WIDTH],
-    uint16_t *stack, uint8_t varRegister[VARIABLE_REGISTERS_SIZE],
+    std::vector<uint16_t>& stack, uint8_t varRegister[VARIABLE_REGISTERS_SIZE],
     uint12_struct *pc, uint16_t *ir) -> void
 {
     // modulo with screen demensions because values can wrap around
@@ -112,7 +134,7 @@ InvalidCommand::InvalidCommand(uint16_t instruction)
 }
 auto InvalidCommand::execute(
     uint8_t *memory, bool display[DISPLAY_HEIGHT][DISPLAY_WIDTH],
-    uint16_t *stack, uint8_t varRegister[VARIABLE_REGISTERS_SIZE],
+    std::vector<uint16_t>& stack, uint8_t varRegister[VARIABLE_REGISTERS_SIZE],
     uint12_struct *pc, uint16_t *ir) -> void
 {
 

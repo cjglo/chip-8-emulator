@@ -3,7 +3,8 @@
 
 #include <thread>
 #include <memory>
-#include <fstream> 
+#include <fstream>
+#include <vector> 
 
 // internal files
 #include "const.h"
