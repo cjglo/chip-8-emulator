@@ -46,6 +46,64 @@ auto SubRoutines::execute(
     pc->bits = this->address.bits;
 }
 
+SkipXEqVar::SkipXEqVar(uint8_t register_x, uint8_t conditional_val)
+{
+    this->register_x = register_x;
+    this->conditional_val = conditional_val;
+}
+auto SkipXEqVar::execute(
+    uint8_t *memory, bool display[DISPLAY_HEIGHT][DISPLAY_WIDTH],
+    std::vector<uint16_t>& stack, uint8_t varRegister[VARIABLE_REGISTERS_SIZE],
+    uint12_struct *pc, uint16_t *ir) -> void
+{
+    if(varRegister[this->register_x] == conditional_val)
+        pc->bits += 2;
+}
+
+SkipXNotEquVar::SkipXNotEquVar(uint8_t register_x, uint8_t conditional_val)
+{
+    this->register_x = register_x;
+    this->conditional_val = conditional_val;
+}
+auto SkipXNotEquVar::execute(
+    uint8_t *memory, bool display[DISPLAY_HEIGHT][DISPLAY_WIDTH],
+    std::vector<uint16_t>& stack, uint8_t varRegister[VARIABLE_REGISTERS_SIZE],
+    uint12_struct *pc, uint16_t *ir) -> void
+{
+    if(varRegister[this->register_x] != conditional_val)
+        pc->bits += 2;
+}
+
+SkipXEquY::SkipXEquY(uint8_t register_x, uint8_t register_y)
+{
+    this->register_x = register_x;
+    this->register_y = register_y;
+}
+auto SkipXEquY::execute(
+    uint8_t *memory, bool display[DISPLAY_HEIGHT][DISPLAY_WIDTH],
+    std::vector<uint16_t>& stack, uint8_t varRegister[VARIABLE_REGISTERS_SIZE],
+    uint12_struct *pc, uint16_t *ir) -> void
+{
+    if(varRegister[this->register_x] == varRegister[this->register_y])
+        pc->bits += 2;
+}
+
+SkipXNotEquY::SkipXNotEquY(uint8_t register_x, uint8_t register_y)
+{
+    this->register_x = register_x;
+    this->register_y = register_y;
+}
+auto SkipXNotEquY::execute(
+    uint8_t *memory, bool display[DISPLAY_HEIGHT][DISPLAY_WIDTH],
+    std::vector<uint16_t>& stack, uint8_t varRegister[VARIABLE_REGISTERS_SIZE],
+    uint12_struct *pc, uint16_t *ir) -> void
+{
+    if(varRegister[this->register_x] != varRegister[this->register_y])
+        pc->bits += 2;
+}
+
+
+
 SetRegister::SetRegister(uint8_t selected_register, uint8_t value_to_set)
 {
     this->selected_register = selected_register;

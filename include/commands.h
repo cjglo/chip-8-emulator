@@ -66,6 +66,58 @@ public:
         uint12_struct *pc, uint16_t *ir) -> void;
 };
 
+class SkipXEqVar : public Command
+{
+private:
+    uint8_t register_x;
+    uint8_t conditional_val;
+public:
+    SkipXEqVar(uint8_t register_x, uint8_t conditional_val);
+    auto execute(
+    uint8_t *memory, bool display[DISPLAY_HEIGHT][DISPLAY_WIDTH],
+    std::vector<uint16_t>& stack, uint8_t varRegisters[VARIABLE_REGISTERS_SIZE],
+    uint12_struct *pc, uint16_t *ir) -> void;
+};
+
+class SkipXNotEquVar : public Command
+{
+private:
+    uint8_t register_x;
+    uint8_t conditional_val;
+public:
+    SkipXNotEquVar(uint8_t register_x, uint8_t conditional_val);
+    auto execute(
+    uint8_t *memory, bool display[DISPLAY_HEIGHT][DISPLAY_WIDTH],
+    std::vector<uint16_t>& stack, uint8_t varRegisters[VARIABLE_REGISTERS_SIZE],
+    uint12_struct *pc, uint16_t *ir) -> void;
+};
+
+class SkipXEquY : public Command
+{
+private:
+    uint8_t register_x;
+    uint8_t register_y;
+public:
+    SkipXEquY(uint8_t register_x, uint8_t register_y);
+    auto execute(
+    uint8_t *memory, bool display[DISPLAY_HEIGHT][DISPLAY_WIDTH],
+    std::vector<uint16_t>& stack, uint8_t varRegisters[VARIABLE_REGISTERS_SIZE],
+    uint12_struct *pc, uint16_t *ir) -> void;
+};
+
+class SkipXNotEquY : public Command
+{
+private:
+    uint8_t register_x;
+    uint8_t register_y;
+public:
+    SkipXNotEquY(uint8_t register_x, uint8_t register_y);
+    auto execute(
+    uint8_t *memory, bool display[DISPLAY_HEIGHT][DISPLAY_WIDTH],
+    std::vector<uint16_t>& stack, uint8_t varRegisters[VARIABLE_REGISTERS_SIZE],
+    uint12_struct *pc, uint16_t *ir) -> void;
+};
+
 class SetRegister : public Command
 {
 private:
