@@ -7,7 +7,7 @@ int main(int argc, char* argv[])
     bool Display[DISPLAY_HEIGHT][DISPLAY_WIDTH];    // Display
     uint8_t fontData[FONT_DATA_SIZE] = FONT_DATA;   // Font
     initializeFontInMemory(Memory, fontData);
-    uint16_t Stack[STACK_SIZE];                     // Stack
+    std::vector<uint16_t> Stack;                    // Stack (usually limited to 16, unlimited here)
     uint8_t DelayTimer = 255;                       // Delay Timer
     uint8_t SoundTimer = 255;                       // Sound Timer
     bool delayTimerOnSwitch = true;                 // bool that stops delay timer
