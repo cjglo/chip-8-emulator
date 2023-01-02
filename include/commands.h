@@ -146,6 +146,20 @@ public:
         uint12_struct *pc, uint16_t *ir) -> void;
 };
 
+class LogicAndArithmetic : public Command
+{
+private:
+    uint8_t operation;
+    uint8_t x_register;
+    uint8_t y_register;
+public:
+    LogicAndArithmetic(uint8_t x_register, uint8_t y_register, uint8_t operation);
+    auto execute(
+        uint8_t *memory, bool display[DISPLAY_HEIGHT][DISPLAY_WIDTH],
+        std::vector<uint16_t>& stack, uint8_t varRegisters[VARIABLE_REGISTERS_SIZE],
+        uint12_struct *pc, uint16_t *ir) -> void;
+};
+
 class SetIndexRegister : public Command
 {
 private:

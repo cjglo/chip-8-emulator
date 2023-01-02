@@ -33,18 +33,21 @@ auto decode(uint16_t instruction) -> std::unique_ptr<Command>
         uint8_t register_x = (instruction & 0x0F00) >> 8;
         uint8_t condtional_val = instruction; // cuts off first 8 bits, leaving last 8
         command = std::make_unique<SkipXEqVar>(register_x, condtional_val);
+        break;
     }
     case 0x4000 ... 0x4FFF:
     {
         uint8_t register_x = (instruction & 0x0F00) >> 8;
         uint8_t condtional_val = instruction; // cuts off first 8 bits, leaving last 8
         command = std::make_unique<SkipXNotEquVar>(register_x, condtional_val);
+        break;
     }
     case 0x5000 ... 0x5FFF:
     {
         uint8_t register_x = (instruction & 0x0F00) >> 8;
         uint8_t register_y = (instruction & 0x00F0) >> 4;
         command = std::make_unique<SkipXEquY>(register_x, register_y);
+        break;
     }
     case 0x6000 ... 0x6FFF:
     {
@@ -60,11 +63,20 @@ auto decode(uint16_t instruction) -> std::unique_ptr<Command>
         command = std::make_unique<AddValueToRegister>(selected_register, value);
         break;
     }
+    case 0x8000 ... 0x8FFF:
+    {
+        uint8_t x_register = instruction & 0x0F00;
+        uint8_t y_register = instruction & 0x00F0;
+        uint8_t operation = instruction & 0x000F;
+        command = std::make_unique<LogicAndArithmetic>(x_register, y_register, operation);
+        break;
+    }
     case 0x9000 ... 0x9FFF:
     {
         uint8_t register_x = (instruction & 0x0F00) >> 8;
         uint8_t register_y = (instruction & 0x00F0) >> 4;
         command = std::make_unique<SkipXNotEquY>(register_x, register_y);
+        break;
     }
     case 0xA000 ... 0xAFFF:
     {

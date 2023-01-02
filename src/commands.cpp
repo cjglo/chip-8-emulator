@@ -102,8 +102,6 @@ auto SkipXNotEquY::execute(
         pc->bits += 2;
 }
 
-
-
 SetRegister::SetRegister(uint8_t selected_register, uint8_t value_to_set)
 {
     this->selected_register = selected_register;
@@ -116,6 +114,86 @@ auto SetRegister::execute(
 {
     // selected_register should be 4 bits max
     varRegister[selected_register] = value_to_set;
+}
+
+LogicAndArithmetic::LogicAndArithmetic(uint8_t x_register, uint8_t y_register, uint8_t operation)
+{
+    this->x_register = x_register;
+    this->y_register = y_register;
+    this->operation = operation;
+}
+auto LogicAndArithmetic::execute(
+    uint8_t *memory, bool display[DISPLAY_HEIGHT][DISPLAY_WIDTH],
+    std::vector<uint16_t>& stack, uint8_t varRegister[VARIABLE_REGISTERS_SIZE],
+    uint12_struct *pc, uint16_t *ir) -> void
+{
+
+    switch (this->operation)
+    {
+    case 0x0:    // Set X to Y
+        varRegister[x_register] = varRegister[y_register];
+        break;
+    case 0x1:
+        varRegister[x_register] = varRegister[x_register] | varRegister[y_register];
+        break;
+    case 0x2:
+        varRegister[x_register] = varRegister[x_register] & varRegister[y_register];
+        break;
+    case 0x3:
+        varRegister[x_register] = varRegister[x_register] ^ varRegister[y_register];
+        break;
+    case 0x4:
+        if(varRegister[x_register] > 255 - varRegister[y_register])
+        {
+            varRegister[0xF] = 1;
+        }
+        else
+        {
+            varRegister[0xF] = 0;
+        }
+        varRegister[x_register] = varRegister[x_register] + varRegister[y_register];
+        break;
+    case 0x5:
+        if(varRegister[x_register] <= varRegister[y_register])
+        {
+            varRegister[0XF] = 1;
+        }
+        else
+        {
+            varRegister[0xF] = 0;
+        }
+        varRegister[x_register] = varRegister[x_register] - varRegister[y_register];
+        break;
+    case 0x6:
+    {
+        varRegister[x_register] = varRegister[y_register];
+        uint8_t carry = varRegister[x_register] & 0x01; // bit that is shifted out is saved for carry flag
+        varRegister[x_register] = varRegister[x_register] >> 1;
+        varRegister[0xF] = carry;
+        break;
+    }
+    case 0x7:
+        if(varRegister[y_register] <= varRegister[x_register])
+        {
+            varRegister[0XF] = 1;
+        }
+        else
+        {
+            varRegister[0xF] = 0;
+        }
+        varRegister[x_register] = varRegister[y_register] - varRegister[x_register];
+        break;
+    case 0xE:
+    {
+        varRegister[x_register] = varRegister[y_register];
+        uint8_t carry = (varRegister[x_register] & 0x80) >> 7; // bit that is shifted out is saved for carry flag
+        varRegister[x_register] = varRegister[x_register] << 1;
+        varRegister[0xF] = carry;
+        break;
+    }
+    default:
+        break;
+    }
 }
 
 AddValueToRegister::AddValueToRegister(uint8_t selected_register, uint8_t value_to_add)
