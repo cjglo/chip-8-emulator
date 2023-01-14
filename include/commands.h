@@ -6,6 +6,7 @@
 #include "const.h"
 #include "drawing.h"
 #include <stdint.h>
+#include <cstdlib>
 
 // testing and debugging
 #define UNIMPLEMENTED_COMMAND_DEBUG_CALL std::cout << "UNIMPLEMENTED COMMAND CALLED" << std::endl;
@@ -167,6 +168,31 @@ private:
 
 public:
     SetIndexRegister(uint12_struct i_register_address);
+    auto execute(
+        uint8_t *memory, bool display[DISPLAY_HEIGHT][DISPLAY_WIDTH],
+        std::vector<uint16_t>& stack, uint8_t varRegisters[VARIABLE_REGISTERS_SIZE],
+        uint12_struct *pc, uint16_t *ir) -> void;
+};
+
+class JumpWithOffset : public Command
+{
+private:
+    uint12_struct address;
+public:
+    JumpWithOffset(uint12_struct address);
+    auto execute(
+        uint8_t *memory, bool display[DISPLAY_HEIGHT][DISPLAY_WIDTH],
+        std::vector<uint16_t>& stack, uint8_t varRegisters[VARIABLE_REGISTERS_SIZE],
+        uint12_struct *pc, uint16_t *ir) -> void;
+};
+
+class RandomNumber : public Command
+{
+private:
+    uint8_t operand;
+    uint8_t x_register;
+public:
+    RandomNumber(uint8_t operand, uint8_t x_register);
     auto execute(
         uint8_t *memory, bool display[DISPLAY_HEIGHT][DISPLAY_WIDTH],
         std::vector<uint16_t>& stack, uint8_t varRegisters[VARIABLE_REGISTERS_SIZE],

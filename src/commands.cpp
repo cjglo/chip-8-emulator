@@ -221,6 +221,31 @@ auto SetIndexRegister::execute(
     *ir = this->i_register_address.bits;
 }
 
+JumpWithOffset::JumpWithOffset(uint12_struct instruction) {
+    this->address = instruction;
+}
+auto JumpWithOffset::execute(
+    uint8_t *memory, bool display[DISPLAY_HEIGHT][DISPLAY_WIDTH],
+    std::vector<uint16_t>& stack, uint8_t varRegister[VARIABLE_REGISTERS_SIZE],
+    uint12_struct *pc, uint16_t *ir) -> void
+{
+    pc->bits = this->address.bits + varRegister[0];
+}
+
+RandomNumber::RandomNumber(uint8_t operand, uint8_t x_register) {
+    this->operand = operand;
+    this->x_register = x_register;
+}
+auto RandomNumber::execute(
+    uint8_t *memory, bool display[DISPLAY_HEIGHT][DISPLAY_WIDTH],
+    std::vector<uint16_t>& stack, uint8_t varRegister[VARIABLE_REGISTERS_SIZE],
+    uint12_struct *pc, uint16_t *ir) -> void
+{
+    uint8_t max = 0XFF;
+    uint8_t rand_num = (rand() % (max + 1));
+    varRegister[this->x_register] = rand_num & this->operand;
+}
+
 DisplayDraw::DisplayDraw(uint8_t x, uint8_t y, uint8_t height)
 {
     this->register_for_x_coordinate = x;

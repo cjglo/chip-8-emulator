@@ -85,6 +85,20 @@ auto decode(uint16_t instruction) -> std::unique_ptr<Command>
         command = std::make_unique<SetIndexRegister>(i_register_address);
         break;
     }
+    case 0xB000 ... 0xBFFF:
+    {
+        uint12_struct address;
+        address.bits = instruction; // 3 least significant bytes saved, last byte dropped
+        command = std::make_unique<JumpWithOffset>(address);
+        break;
+    }
+    case 0xC000 ... 0xCFFF:
+    {
+        uint8_t operand = instruction & 0xFF;
+        uint8_t x_register = (instruction & 0x0F00) >> 8;
+        command = std::make_unique<RandomNumber>(operand, x_register);
+        break;
+    }
     case 0xD000 ... 0xDFFF:
     {
         uint8_t x = (instruction & 0x0F00) >> 8; // first 4 bits after D is register to get x
